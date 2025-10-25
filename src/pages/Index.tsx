@@ -5,109 +5,133 @@ import Icon from '@/components/ui/icon';
 
 const Index = () => {
   const [selectedVariant, setSelectedVariant] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
 
   const variants = [
     {
-      name: 'Светлый',
+      name: 'Градиент',
       bg: 'bg-white',
-      logo: 'border-[#0EA5E9]',
+      gradientFrom: '#0EA5E9',
+      gradientTo: '#1E40AF',
       text: 'text-slate-800',
-      accent: 'text-[#0EA5E9]'
+      subtitle: 'text-slate-600'
     },
     {
-      name: 'Темный',
+      name: 'Монохром',
       bg: 'bg-slate-900',
-      logo: 'border-white',
+      gradientFrom: '#FFFFFF',
+      gradientTo: '#94A3B8',
       text: 'text-white',
-      accent: 'text-white'
+      subtitle: 'text-slate-300'
     },
     {
-      name: 'Синий',
-      bg: 'bg-[#0EA5E9]',
-      logo: 'border-white',
+      name: 'Инверсия',
+      bg: 'bg-gradient-to-br from-[#0EA5E9] to-[#1E40AF]',
+      gradientFrom: '#FFFFFF',
+      gradientTo: '#FFFFFF',
       text: 'text-white',
-      accent: 'text-white'
+      subtitle: 'text-white/80'
     }
   ];
 
   const currentVariant = variants[selectedVariant];
 
   return (
-    <div className="min-h-screen bg-slate-50 p-8">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-8">
       <div className="max-w-6xl mx-auto space-y-16">
         
-        <div className="text-center space-y-2 animate-fade-in">
-          <h1 className="text-4xl font-light text-slate-800 tracking-wide" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+        <div className="text-center space-y-3 animate-fade-in">
+          <h1 className="text-5xl font-semibold text-slate-800" style={{ fontFamily: 'Montserrat, sans-serif' }}>
             Логотип типографии
           </h1>
-          <p className="text-sm text-slate-500 uppercase tracking-widest" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 300 }}>
-            Минимализм и геометрия
+          <p className="text-lg text-slate-600" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 300 }}>
+            Абстрактный символ творчества и современности
           </p>
         </div>
 
-        <Card className={`${currentVariant.bg} p-20 transition-all duration-500 border-0 shadow-sm`}>
-          <div className="flex flex-col items-center justify-center space-y-12">
+        <Card 
+          className={`${currentVariant.bg} p-20 transition-all duration-500 border-0 shadow-xl`}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <div className="flex flex-col items-center justify-center space-y-10">
             
-            <div className="relative group">
-              <svg viewBox="0 0 200 80" className="w-64 h-auto">
-                <rect 
-                  x="10" y="10" width="60" height="60" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
-                  className={`${currentVariant.logo.replace('border-', 'text-')} transition-all duration-300 group-hover:stroke-[3]`}
+            <div className="relative">
+              <svg 
+                viewBox="0 0 200 200" 
+                className={`w-48 h-48 transition-transform duration-700 ${isHovered ? 'scale-110 rotate-12' : 'scale-100 rotate-0'}`}
+              >
+                <defs>
+                  <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style={{ stopColor: currentVariant.gradientFrom, stopOpacity: 1 }} />
+                    <stop offset="100%" style={{ stopColor: currentVariant.gradientTo, stopOpacity: 1 }} />
+                  </linearGradient>
+                </defs>
+                
+                <path
+                  d="M 100 20 Q 150 40 160 80 Q 170 120 140 150 Q 110 180 70 160 Q 30 140 40 100 Q 50 60 100 20 Z"
+                  fill="url(#logoGradient)"
+                  opacity="0.9"
+                  className="transition-all duration-700"
                 />
-                <line 
-                  x1="90" y1="20" x2="90" y2="60" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
-                  className={currentVariant.logo.replace('border-', 'text-')}
+                
+                <circle
+                  cx="100"
+                  cy="80"
+                  r="25"
+                  fill="url(#logoGradient)"
+                  opacity="0.6"
+                  className={`transition-all duration-700 ${isHovered ? 'translate-x-2' : ''}`}
                 />
-                <line 
-                  x1="110" y1="40" x2="140" y2="40" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
-                  className={currentVariant.logo.replace('border-', 'text-')}
-                />
-                <circle 
-                  cx="170" cy="40" r="20" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
-                  className={currentVariant.logo.replace('border-', 'text-')}
+                
+                <path
+                  d="M 60 120 Q 100 100 140 120 Q 120 150 100 145 Q 80 150 60 120 Z"
+                  fill="url(#logoGradient)"
+                  opacity="0.7"
                 />
               </svg>
             </div>
 
-            <div className="text-center space-y-3">
+            <div className="text-center space-y-4">
               <h2 
-                className={`text-5xl font-light ${currentVariant.text} tracking-[0.2em] uppercase`}
-                style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 300 }}
+                className={`text-6xl font-bold ${currentVariant.text} tracking-tight`}
+                style={{ fontFamily: 'Montserrat, sans-serif' }}
               >
-                Формат
+                ФОРМАТ
               </h2>
-              <div className={`h-px w-32 mx-auto ${currentVariant.logo.replace('border-', 'bg-')}`}></div>
-              <p className={`text-xs ${currentVariant.text} opacity-60 uppercase tracking-[0.4em]`} 
+              <p className={`text-sm ${currentVariant.subtitle} uppercase tracking-[0.3em]`} 
                  style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 300 }}>
-                Типография
+                Творческая типография
               </p>
             </div>
           </div>
         </Card>
 
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-3 gap-6">
           {variants.map((variant, index) => (
             <Card
               key={index}
-              className={`${variant.bg} p-6 cursor-pointer transition-all duration-300 border-0 ${
-                selectedVariant === index ? 'ring-1 ring-slate-300 shadow-lg' : 'shadow-sm hover:shadow-md'
+              className={`${variant.bg} p-8 cursor-pointer transition-all duration-300 border-0 hover:scale-105 ${
+                selectedVariant === index ? 'ring-2 ring-[#0EA5E9] shadow-xl' : 'shadow-md'
               }`}
               onClick={() => setSelectedVariant(index)}
             >
-              <div className="flex flex-col items-center space-y-3">
-                <div className={`w-12 h-12 border ${variant.logo}`}></div>
-                <p className={`text-xs ${variant.text} uppercase tracking-wider`} 
-                   style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 300 }}>
+              <div className="flex flex-col items-center space-y-4">
+                <svg viewBox="0 0 80 80" className="w-16 h-16">
+                  <defs>
+                    <linearGradient id={`mini-gradient-${index}`} x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" style={{ stopColor: variant.gradientFrom, stopOpacity: 1 }} />
+                      <stop offset="100%" style={{ stopColor: variant.gradientTo, stopOpacity: 1 }} />
+                    </linearGradient>
+                  </defs>
+                  <path
+                    d="M 40 10 Q 60 16 64 32 Q 68 48 56 60 Q 44 72 28 64 Q 12 56 16 40 Q 20 24 40 10 Z"
+                    fill={`url(#mini-gradient-${index})`}
+                    opacity="0.9"
+                  />
+                </svg>
+                <p className={`text-xs ${variant.text} font-medium uppercase tracking-wider`} 
+                   style={{ fontFamily: 'Montserrat, sans-serif' }}>
                   {variant.name}
                 </p>
               </div>
@@ -116,123 +140,160 @@ const Index = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card className="bg-white p-8 border-0 shadow-sm">
+          <Card className="bg-white p-8 border-0 shadow-lg hover:shadow-xl transition-shadow">
             <div className="space-y-4">
-              <div className="w-10 h-10 border-2 border-[#0EA5E9]"></div>
-              <h3 className="text-lg font-light text-slate-800" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                Геометрия
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#0EA5E9] to-[#1E40AF] flex items-center justify-center">
+                <Icon name="Sparkles" size={24} className="text-white" />
+              </div>
+              <h3 className="text-xl font-semibold text-slate-800" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                Творчество
               </h3>
-              <p className="text-sm text-slate-600 leading-relaxed" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 300 }}>
-                Чистые линии и базовые формы создают универсальный символ
+              <p className="text-sm text-slate-600 leading-relaxed" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400 }}>
+                Плавные органические формы символизируют креативность и свободу выражения
               </p>
             </div>
           </Card>
 
-          <Card className="bg-white p-8 border-0 shadow-sm">
+          <Card className="bg-white p-8 border-0 shadow-lg hover:shadow-xl transition-shadow">
             <div className="space-y-4">
-              <div className="w-10 h-px bg-[#0EA5E9]"></div>
-              <h3 className="text-lg font-light text-slate-800" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                Простота
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#1E40AF] to-[#0EA5E9] flex items-center justify-center">
+                <Icon name="Zap" size={24} className="text-white" />
+              </div>
+              <h3 className="text-xl font-semibold text-slate-800" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                Динамика
               </h3>
-              <p className="text-sm text-slate-600 leading-relaxed" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 300 }}>
-                Минимум деталей для максимальной узнаваемости
+              <p className="text-sm text-slate-600 leading-relaxed" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400 }}>
+                Асимметричная композиция создает ощущение движения и развития
               </p>
             </div>
           </Card>
 
-          <Card className="bg-white p-8 border-0 shadow-sm">
+          <Card className="bg-white p-8 border-0 shadow-lg hover:shadow-xl transition-shadow">
             <div className="space-y-4">
-              <div className="w-10 h-10 rounded-full border-2 border-[#0EA5E9]"></div>
-              <h3 className="text-lg font-light text-slate-800" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                Гармония
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#0EA5E9] via-[#1E40AF] to-[#0EA5E9] flex items-center justify-center">
+                <Icon name="Award" size={24} className="text-white" />
+              </div>
+              <h3 className="text-xl font-semibold text-slate-800" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                Современность
               </h3>
-              <p className="text-sm text-slate-600 leading-relaxed" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 300 }}>
-                Баланс между формами и пустым пространством
+              <p className="text-sm text-slate-600 leading-relaxed" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400 }}>
+                Градиентная заливка отражает актуальные тренды цифрового дизайна
               </p>
             </div>
           </Card>
         </div>
 
-        <Card className="bg-white p-10 border-0 shadow-sm">
+        <Card className="bg-white p-10 border-0 shadow-lg">
           <div className="space-y-8">
-            <h3 className="text-2xl font-light text-slate-800 text-center" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-              Построение логотипа
+            <h3 className="text-3xl font-semibold text-slate-800 text-center" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+              Символика
             </h3>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="space-y-4">
-                <div className="bg-slate-50 p-8 flex items-center justify-center">
-                  <svg viewBox="0 0 100 100" className="w-32 h-32">
-                    <rect x="10" y="10" width="80" height="80" fill="none" stroke="#CBD5E1" strokeWidth="1" strokeDasharray="2,2" />
-                    <rect x="20" y="20" width="60" height="60" fill="none" stroke="#0EA5E9" strokeWidth="2" />
-                    <circle cx="50" cy="50" r="3" fill="#0EA5E9" />
-                  </svg>
-                </div>
-                <p className="text-xs text-slate-500 text-center uppercase tracking-wider" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 300 }}>
-                  Модульная сетка
-                </p>
-              </div>
-
-              <div className="space-y-4">
-                <div className="bg-slate-50 p-8 flex items-center justify-center">
-                  <div className="space-y-2 text-center">
-                    <div className="flex items-center justify-center space-x-4">
-                      <div className="w-8 h-8 bg-[#0EA5E9]"></div>
-                      <span className="text-xs text-slate-600 font-mono">#0EA5E9</span>
-                    </div>
-                    <div className="flex items-center justify-center space-x-4">
-                      <div className="w-8 h-8 bg-[#1E40AF]"></div>
-                      <span className="text-xs text-slate-600 font-mono">#1E40AF</span>
-                    </div>
-                    <div className="flex items-center justify-center space-x-4">
-                      <div className="w-8 h-8 border-2 border-slate-300 bg-white"></div>
-                      <span className="text-xs text-slate-600 font-mono">#FFFFFF</span>
-                    </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+              <div className="space-y-6">
+                <div className="flex items-start space-x-4">
+                  <div className="w-2 h-2 rounded-full bg-[#0EA5E9] mt-2"></div>
+                  <div>
+                    <h4 className="font-semibold text-slate-700 mb-2" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                      Органические формы
+                    </h4>
+                    <p className="text-sm text-slate-600" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 300 }}>
+                      Плавные кривые линии символизируют творческий подход к печати
+                    </p>
                   </div>
                 </div>
-                <p className="text-xs text-slate-500 text-center uppercase tracking-wider" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 300 }}>
-                  Цветовая палитра
-                </p>
+
+                <div className="flex items-start space-x-4">
+                  <div className="w-2 h-2 rounded-full bg-[#1E40AF] mt-2"></div>
+                  <div>
+                    <h4 className="font-semibold text-slate-700 mb-2" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                      Многослойность
+                    </h4>
+                    <p className="text-sm text-slate-600" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 300 }}>
+                      Наложение элементов отражает технологию многоцветной печати
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-4">
+                  <div className="w-2 h-2 rounded-full bg-[#0EA5E9] mt-2"></div>
+                  <div>
+                    <h4 className="font-semibold text-slate-700 mb-2" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                      Градиентные переходы
+                    </h4>
+                    <p className="text-sm text-slate-600" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 300 }}>
+                      Плавная смена цветов демонстрирует качество цветопередачи
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-br from-slate-50 to-blue-50 p-12 rounded-lg flex items-center justify-center">
+                <svg viewBox="0 0 200 200" className="w-64 h-64">
+                  <defs>
+                    <linearGradient id="symbolGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" style={{ stopColor: '#0EA5E9', stopOpacity: 1 }} />
+                      <stop offset="100%" style={{ stopColor: '#1E40AF', stopOpacity: 1 }} />
+                    </linearGradient>
+                  </defs>
+                  
+                  <path
+                    d="M 100 20 Q 150 40 160 80 Q 170 120 140 150 Q 110 180 70 160 Q 30 140 40 100 Q 50 60 100 20 Z"
+                    fill="url(#symbolGradient)"
+                    opacity="0.9"
+                  />
+                  
+                  <circle cx="100" cy="80" r="25" fill="url(#symbolGradient)" opacity="0.6" />
+                  
+                  <path
+                    d="M 60 120 Q 100 100 140 120 Q 120 150 100 145 Q 80 150 60 120 Z"
+                    fill="url(#symbolGradient)"
+                    opacity="0.7"
+                  />
+                </svg>
               </div>
             </div>
           </div>
         </Card>
 
-        <Card className="bg-slate-900 p-10 border-0 shadow-sm">
+        <Card className="bg-gradient-to-r from-[#0EA5E9] to-[#1E40AF] p-10 border-0 shadow-xl">
           <div className="space-y-6 text-center">
-            <h3 className="text-xl font-light text-white" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+            <h3 className="text-2xl font-semibold text-white" style={{ fontFamily: 'Montserrat, sans-serif' }}>
               Файлы для скачивания
             </h3>
+            <p className="text-sm text-white/80" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 300 }}>
+              Все форматы с сохранением градиентов
+            </p>
             
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-2xl mx-auto">
-              <Button variant="outline" className="bg-transparent hover:bg-white/10 text-white border-white/20">
-                <Icon name="Download" size={14} className="mr-2" />
-                <span className="text-xs">SVG</span>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
+              <Button variant="secondary" className="bg-white/20 hover:bg-white/30 text-white border-white/30 backdrop-blur">
+                <Icon name="Download" size={16} className="mr-2" />
+                SVG
               </Button>
-              <Button variant="outline" className="bg-transparent hover:bg-white/10 text-white border-white/20">
-                <Icon name="Download" size={14} className="mr-2" />
-                <span className="text-xs">PNG</span>
+              <Button variant="secondary" className="bg-white/20 hover:bg-white/30 text-white border-white/30 backdrop-blur">
+                <Icon name="Download" size={16} className="mr-2" />
+                PNG
               </Button>
-              <Button variant="outline" className="bg-transparent hover:bg-white/10 text-white border-white/20">
-                <Icon name="Download" size={14} className="mr-2" />
-                <span className="text-xs">EPS</span>
+              <Button variant="secondary" className="bg-white/20 hover:bg-white/30 text-white border-white/30 backdrop-blur">
+                <Icon name="Download" size={16} className="mr-2" />
+                EPS
               </Button>
-              <Button variant="outline" className="bg-transparent hover:bg-white/10 text-white border-white/20">
-                <Icon name="Download" size={14} className="mr-2" />
-                <span className="text-xs">AI</span>
+              <Button variant="secondary" className="bg-white/20 hover:bg-white/30 text-white border-white/30 backdrop-blur">
+                <Icon name="Download" size={16} className="mr-2" />
+                AI
               </Button>
             </div>
           </div>
         </Card>
 
-        <div className="bg-white rounded p-6 shadow-sm">
+        <div className="bg-white rounded-lg p-8 shadow-lg border-0">
           <p className="text-xs text-slate-400 text-center mb-4 uppercase tracking-wider" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 300 }}>
             ИИ-концепт
           </p>
           <img 
-            src="https://cdn.poehali.dev/projects/f5e8afe5-8b08-4867-8418-b357290294d3/files/652d2aa2-b32a-4c9f-8e1b-18799c227560.jpg"
-            alt="Минималистичный концепт логотипа"
-            className="w-full h-auto rounded"
+            src="https://cdn.poehali.dev/projects/f5e8afe5-8b08-4867-8418-b357290294d3/files/86353eae-2d35-4aa6-8168-375805facacd.jpg"
+            alt="Абстрактный креативный концепт логотипа"
+            className="w-full h-auto rounded-lg"
           />
         </div>
 
