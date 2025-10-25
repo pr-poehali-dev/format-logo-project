@@ -4,300 +4,358 @@ import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 
 const Index = () => {
-  const [selectedVariant, setSelectedVariant] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
+  const [selectedGradient, setSelectedGradient] = useState(0);
 
-  const variants = [
+  const gradients = [
     {
-      name: 'Градиент',
-      bg: 'bg-white',
-      gradientFrom: '#0EA5E9',
-      gradientTo: '#1E40AF',
-      text: 'text-slate-800',
-      subtitle: 'text-slate-600'
+      name: 'Океан',
+      from: '#0EA5E9',
+      via: '#0284C7',
+      to: '#1E40AF',
+      angle: '135deg'
     },
     {
-      name: 'Монохром',
-      bg: 'bg-slate-900',
-      gradientFrom: '#FFFFFF',
-      gradientTo: '#94A3B8',
-      text: 'text-white',
-      subtitle: 'text-slate-300'
+      name: 'Закат',
+      from: '#F97316',
+      via: '#EF4444',
+      to: '#DC2626',
+      angle: '180deg'
     },
     {
-      name: 'Инверсия',
-      bg: 'bg-gradient-to-br from-[#0EA5E9] to-[#1E40AF]',
-      gradientFrom: '#FFFFFF',
-      gradientTo: '#FFFFFF',
-      text: 'text-white',
-      subtitle: 'text-white/80'
+      name: 'Аврора',
+      from: '#8B5CF6',
+      via: '#D946EF',
+      to: '#EC4899',
+      angle: '90deg'
+    },
+    {
+      name: 'Лес',
+      from: '#10B981',
+      via: '#059669',
+      to: '#047857',
+      angle: '45deg'
     }
   ];
 
-  const currentVariant = variants[selectedVariant];
+  const currentGradient = gradients[selectedGradient];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-8">
-      <div className="max-w-6xl mx-auto space-y-16">
+    <div className="min-h-screen bg-slate-950 p-8">
+      <div className="max-w-7xl mx-auto space-y-12">
         
-        <div className="text-center space-y-3 animate-fade-in">
-          <h1 className="text-5xl font-semibold text-slate-800" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-            Логотип типографии
+        <div className="text-center space-y-4 animate-fade-in">
+          <h1 
+            className="text-6xl font-bold bg-gradient-to-r from-[#0EA5E9] via-[#0284C7] to-[#1E40AF] bg-clip-text text-transparent"
+            style={{ fontFamily: 'Montserrat, sans-serif' }}
+          >
+            ФОРМАТ
           </h1>
-          <p className="text-lg text-slate-600" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 300 }}>
-            Абстрактный символ творчества и современности
+          <p className="text-xl text-slate-400" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 300 }}>
+            Градиент как символ современности и динамики
           </p>
         </div>
 
         <Card 
-          className={`${currentVariant.bg} p-20 transition-all duration-500 border-0 shadow-xl`}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
+          className="bg-slate-900 p-24 border-0 shadow-2xl overflow-hidden relative group"
         >
-          <div className="flex flex-col items-center justify-center space-y-10">
-            
+          <div 
+            className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity duration-700"
+            style={{
+              background: `linear-gradient(${currentGradient.angle}, ${currentGradient.from}, ${currentGradient.via}, ${currentGradient.to})`
+            }}
+          />
+          
+          <div className="relative flex flex-col items-center justify-center space-y-8">
             <div className="relative">
-              <svg 
-                viewBox="0 0 200 200" 
-                className={`w-48 h-48 transition-transform duration-700 ${isHovered ? 'scale-110 rotate-12' : 'scale-100 rotate-0'}`}
-              >
-                <defs>
-                  <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" style={{ stopColor: currentVariant.gradientFrom, stopOpacity: 1 }} />
-                    <stop offset="100%" style={{ stopColor: currentVariant.gradientTo, stopOpacity: 1 }} />
-                  </linearGradient>
-                </defs>
-                
-                <path
-                  d="M 100 20 Q 150 40 160 80 Q 170 120 140 150 Q 110 180 70 160 Q 30 140 40 100 Q 50 60 100 20 Z"
-                  fill="url(#logoGradient)"
-                  opacity="0.9"
-                  className="transition-all duration-700"
-                />
-                
-                <circle
-                  cx="100"
-                  cy="80"
-                  r="25"
-                  fill="url(#logoGradient)"
-                  opacity="0.6"
-                  className={`transition-all duration-700 ${isHovered ? 'translate-x-2' : ''}`}
-                />
-                
-                <path
-                  d="M 60 120 Q 100 100 140 120 Q 120 150 100 145 Q 80 150 60 120 Z"
-                  fill="url(#logoGradient)"
-                  opacity="0.7"
-                />
-              </svg>
-            </div>
-
-            <div className="text-center space-y-4">
               <h2 
-                className={`text-6xl font-bold ${currentVariant.text} tracking-tight`}
-                style={{ fontFamily: 'Montserrat, sans-serif' }}
+                className="text-[140px] font-black leading-none select-none transition-all duration-700 group-hover:tracking-wider"
+                style={{ 
+                  fontFamily: 'Montserrat, sans-serif',
+                  background: `linear-gradient(${currentGradient.angle}, ${currentGradient.from}, ${currentGradient.via}, ${currentGradient.to})`,
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text'
+                }}
               >
                 ФОРМАТ
               </h2>
-              <p className={`text-sm ${currentVariant.subtitle} uppercase tracking-[0.3em]`} 
-                 style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 300 }}>
-                Творческая типография
-              </p>
+              
+              <div 
+                className="absolute -bottom-4 left-0 right-0 h-2 rounded-full blur-sm transition-all duration-700"
+                style={{
+                  background: `linear-gradient(90deg, ${currentGradient.from}, ${currentGradient.via}, ${currentGradient.to})`
+                }}
+              />
             </div>
+
+            <p 
+              className="text-lg tracking-[0.4em] uppercase font-light"
+              style={{ 
+                fontFamily: 'Montserrat, sans-serif',
+                background: `linear-gradient(90deg, ${currentGradient.from}, ${currentGradient.to})`,
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text'
+              }}
+            >
+              Типография
+            </p>
           </div>
         </Card>
 
-        <div className="grid grid-cols-3 gap-6">
-          {variants.map((variant, index) => (
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {gradients.map((gradient, index) => (
             <Card
               key={index}
-              className={`${variant.bg} p-8 cursor-pointer transition-all duration-300 border-0 hover:scale-105 ${
-                selectedVariant === index ? 'ring-2 ring-[#0EA5E9] shadow-xl' : 'shadow-md'
-              }`}
-              onClick={() => setSelectedVariant(index)}
+              className="bg-slate-900 p-6 cursor-pointer transition-all duration-300 border-0 hover:scale-105 hover:shadow-2xl group"
+              onClick={() => setSelectedGradient(index)}
+              style={{
+                boxShadow: selectedGradient === index ? `0 0 40px ${gradient.from}40` : 'none'
+              }}
             >
-              <div className="flex flex-col items-center space-y-4">
-                <svg viewBox="0 0 80 80" className="w-16 h-16">
-                  <defs>
-                    <linearGradient id={`mini-gradient-${index}`} x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" style={{ stopColor: variant.gradientFrom, stopOpacity: 1 }} />
-                      <stop offset="100%" style={{ stopColor: variant.gradientTo, stopOpacity: 1 }} />
-                    </linearGradient>
-                  </defs>
-                  <path
-                    d="M 40 10 Q 60 16 64 32 Q 68 48 56 60 Q 44 72 28 64 Q 12 56 16 40 Q 20 24 40 10 Z"
-                    fill={`url(#mini-gradient-${index})`}
-                    opacity="0.9"
-                  />
-                </svg>
-                <p className={`text-xs ${variant.text} font-medium uppercase tracking-wider`} 
-                   style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                  {variant.name}
-                </p>
+              <div className="space-y-4">
+                <div 
+                  className="w-full h-24 rounded-lg transition-all duration-500 group-hover:scale-105"
+                  style={{
+                    background: `linear-gradient(${gradient.angle}, ${gradient.from}, ${gradient.via}, ${gradient.to})`
+                  }}
+                />
+                <div className="space-y-2">
+                  <p 
+                    className="text-sm font-semibold"
+                    style={{ 
+                      fontFamily: 'Montserrat, sans-serif',
+                      background: `linear-gradient(90deg, ${gradient.from}, ${gradient.to})`,
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text'
+                    }}
+                  >
+                    {gradient.name}
+                  </p>
+                  <div className="flex items-center space-x-1">
+                    <div className="w-4 h-4 rounded-full" style={{ backgroundColor: gradient.from }} />
+                    <div className="w-4 h-4 rounded-full" style={{ backgroundColor: gradient.via }} />
+                    <div className="w-4 h-4 rounded-full" style={{ backgroundColor: gradient.to }} />
+                  </div>
+                </div>
               </div>
             </Card>
           ))}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card className="bg-white p-8 border-0 shadow-lg hover:shadow-xl transition-shadow">
+          <Card className="bg-slate-900 p-8 border-0 shadow-xl group hover:shadow-2xl transition-all">
             <div className="space-y-4">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#0EA5E9] to-[#1E40AF] flex items-center justify-center">
-                <Icon name="Sparkles" size={24} className="text-white" />
+              <div 
+                className="w-12 h-12 rounded-xl flex items-center justify-center"
+                style={{
+                  background: 'linear-gradient(135deg, #0EA5E9, #1E40AF)'
+                }}
+              >
+                <Icon name="TrendingUp" size={24} className="text-white" />
               </div>
-              <h3 className="text-xl font-semibold text-slate-800" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                Творчество
-              </h3>
-              <p className="text-sm text-slate-600 leading-relaxed" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400 }}>
-                Плавные органические формы символизируют креативность и свободу выражения
-              </p>
-            </div>
-          </Card>
-
-          <Card className="bg-white p-8 border-0 shadow-lg hover:shadow-xl transition-shadow">
-            <div className="space-y-4">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#1E40AF] to-[#0EA5E9] flex items-center justify-center">
-                <Icon name="Zap" size={24} className="text-white" />
-              </div>
-              <h3 className="text-xl font-semibold text-slate-800" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+              <h3 className="text-xl font-semibold text-white" style={{ fontFamily: 'Montserrat, sans-serif' }}>
                 Динамика
               </h3>
-              <p className="text-sm text-slate-600 leading-relaxed" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400 }}>
-                Асимметричная композиция создает ощущение движения и развития
+              <p className="text-sm text-slate-400 leading-relaxed" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 300 }}>
+                Плавные цветовые переходы создают эффект движения и прогресса
               </p>
             </div>
           </Card>
 
-          <Card className="bg-white p-8 border-0 shadow-lg hover:shadow-xl transition-shadow">
+          <Card className="bg-slate-900 p-8 border-0 shadow-xl group hover:shadow-2xl transition-all">
             <div className="space-y-4">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#0EA5E9] via-[#1E40AF] to-[#0EA5E9] flex items-center justify-center">
-                <Icon name="Award" size={24} className="text-white" />
+              <div 
+                className="w-12 h-12 rounded-xl flex items-center justify-center"
+                style={{
+                  background: 'linear-gradient(135deg, #8B5CF6, #EC4899)'
+                }}
+              >
+                <Icon name="Sparkles" size={24} className="text-white" />
               </div>
-              <h3 className="text-xl font-semibold text-slate-800" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+              <h3 className="text-xl font-semibold text-white" style={{ fontFamily: 'Montserrat, sans-serif' }}>
                 Современность
               </h3>
-              <p className="text-sm text-slate-600 leading-relaxed" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400 }}>
-                Градиентная заливка отражает актуальные тренды цифрового дизайна
+              <p className="text-sm text-slate-400 leading-relaxed" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 300 }}>
+                Градиенты — актуальный тренд цифрового дизайна 2025 года
+              </p>
+            </div>
+          </Card>
+
+          <Card className="bg-slate-900 p-8 border-0 shadow-xl group hover:shadow-2xl transition-all">
+            <div className="space-y-4">
+              <div 
+                className="w-12 h-12 rounded-xl flex items-center justify-center"
+                style={{
+                  background: 'linear-gradient(135deg, #10B981, #047857)'
+                }}
+              >
+                <Icon name="Layers" size={24} className="text-white" />
+              </div>
+              <h3 className="text-xl font-semibold text-white" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                Глубина
+              </h3>
+              <p className="text-sm text-slate-400 leading-relaxed" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 300 }}>
+                Многослойность градиента символизирует профессиональную печать
               </p>
             </div>
           </Card>
         </div>
 
-        <Card className="bg-white p-10 border-0 shadow-lg">
+        <Card className="bg-slate-900 p-10 border-0 shadow-xl">
           <div className="space-y-8">
-            <h3 className="text-3xl font-semibold text-slate-800 text-center" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-              Символика
+            <h3 className="text-3xl font-bold text-white text-center" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+              Градиентная палитра
             </h3>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="space-y-6">
-                <div className="flex items-start space-x-4">
-                  <div className="w-2 h-2 rounded-full bg-[#0EA5E9] mt-2"></div>
-                  <div>
-                    <h4 className="font-semibold text-slate-700 mb-2" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                      Органические формы
-                    </h4>
-                    <p className="text-sm text-slate-600" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 300 }}>
-                      Плавные кривые линии символизируют творческий подход к печати
-                    </p>
+                <div className="space-y-3">
+                  <p className="text-xs text-slate-500 uppercase tracking-wider">Основной градиент</p>
+                  <div className="h-32 rounded-lg" style={{
+                    background: 'linear-gradient(135deg, #0EA5E9 0%, #0284C7 50%, #1E40AF 100%)'
+                  }} />
+                  <div className="grid grid-cols-3 gap-2 text-xs font-mono">
+                    <div className="space-y-1">
+                      <div className="w-full h-8 rounded" style={{ backgroundColor: '#0EA5E9' }} />
+                      <p className="text-slate-400 text-center">#0EA5E9</p>
+                    </div>
+                    <div className="space-y-1">
+                      <div className="w-full h-8 rounded" style={{ backgroundColor: '#0284C7' }} />
+                      <p className="text-slate-400 text-center">#0284C7</p>
+                    </div>
+                    <div className="space-y-1">
+                      <div className="w-full h-8 rounded" style={{ backgroundColor: '#1E40AF' }} />
+                      <p className="text-slate-400 text-center">#1E40AF</p>
+                    </div>
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-4">
-                  <div className="w-2 h-2 rounded-full bg-[#1E40AF] mt-2"></div>
-                  <div>
-                    <h4 className="font-semibold text-slate-700 mb-2" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                      Многослойность
-                    </h4>
-                    <p className="text-sm text-slate-600" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 300 }}>
-                      Наложение элементов отражает технологию многоцветной печати
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="w-2 h-2 rounded-full bg-[#0EA5E9] mt-2"></div>
-                  <div>
-                    <h4 className="font-semibold text-slate-700 mb-2" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                      Градиентные переходы
-                    </h4>
-                    <p className="text-sm text-slate-600" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 300 }}>
-                      Плавная смена цветов демонстрирует качество цветопередачи
-                    </p>
+                <div className="space-y-3">
+                  <p className="text-xs text-slate-500 uppercase tracking-wider">Дополнительные градиенты</p>
+                  <div className="space-y-2">
+                    <div className="h-12 rounded-lg" style={{
+                      background: 'linear-gradient(90deg, #F97316, #EF4444, #DC2626)'
+                    }} />
+                    <div className="h-12 rounded-lg" style={{
+                      background: 'linear-gradient(90deg, #8B5CF6, #D946EF, #EC4899)'
+                    }} />
+                    <div className="h-12 rounded-lg" style={{
+                      background: 'linear-gradient(90deg, #10B981, #059669, #047857)'
+                    }} />
                   </div>
                 </div>
               </div>
 
-              <div className="bg-gradient-to-br from-slate-50 to-blue-50 p-12 rounded-lg flex items-center justify-center">
-                <svg viewBox="0 0 200 200" className="w-64 h-64">
-                  <defs>
-                    <linearGradient id="symbolGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" style={{ stopColor: '#0EA5E9', stopOpacity: 1 }} />
-                      <stop offset="100%" style={{ stopColor: '#1E40AF', stopOpacity: 1 }} />
-                    </linearGradient>
-                  </defs>
-                  
-                  <path
-                    d="M 100 20 Q 150 40 160 80 Q 170 120 140 150 Q 110 180 70 160 Q 30 140 40 100 Q 50 60 100 20 Z"
-                    fill="url(#symbolGradient)"
-                    opacity="0.9"
-                  />
-                  
-                  <circle cx="100" cy="80" r="25" fill="url(#symbolGradient)" opacity="0.6" />
-                  
-                  <path
-                    d="M 60 120 Q 100 100 140 120 Q 120 150 100 145 Q 80 150 60 120 Z"
-                    fill="url(#symbolGradient)"
-                    opacity="0.7"
-                  />
-                </svg>
+              <div className="space-y-6">
+                <div className="space-y-3">
+                  <p className="text-xs text-slate-500 uppercase tracking-wider">Типографика с градиентом</p>
+                  <div className="bg-slate-950 rounded-lg p-6 space-y-4">
+                    <h1 
+                      className="text-5xl font-black"
+                      style={{
+                        fontFamily: 'Montserrat, sans-serif',
+                        background: 'linear-gradient(135deg, #0EA5E9, #1E40AF)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        backgroundClip: 'text'
+                      }}
+                    >
+                      ФОРМАТ
+                    </h1>
+                    <h2 
+                      className="text-2xl font-semibold"
+                      style={{
+                        fontFamily: 'Montserrat, sans-serif',
+                        background: 'linear-gradient(90deg, #0EA5E9, #0284C7)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        backgroundClip: 'text'
+                      }}
+                    >
+                      Типография
+                    </h2>
+                    <p className="text-sm text-slate-400">
+                      Текст с градиентом привлекает внимание и создает премиальное впечатление
+                    </p>
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <p className="text-xs text-slate-500 uppercase tracking-wider">Углы градиента</p>
+                  <div className="grid grid-cols-3 gap-2">
+                    <div className="space-y-2">
+                      <div className="h-16 rounded-lg" style={{
+                        background: 'linear-gradient(0deg, #0EA5E9, #1E40AF)'
+                      }} />
+                      <p className="text-xs text-slate-500 text-center">0°</p>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="h-16 rounded-lg" style={{
+                        background: 'linear-gradient(90deg, #0EA5E9, #1E40AF)'
+                      }} />
+                      <p className="text-xs text-slate-500 text-center">90°</p>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="h-16 rounded-lg" style={{
+                        background: 'linear-gradient(135deg, #0EA5E9, #1E40AF)'
+                      }} />
+                      <p className="text-xs text-slate-500 text-center">135°</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </Card>
 
-        <Card className="bg-gradient-to-r from-[#0EA5E9] to-[#1E40AF] p-10 border-0 shadow-xl">
-          <div className="space-y-6 text-center">
+        <Card className="bg-slate-900 p-10 border-0 shadow-xl overflow-hidden relative">
+          <div 
+            className="absolute inset-0 opacity-5"
+            style={{
+              background: 'linear-gradient(135deg, #0EA5E9, #0284C7, #1E40AF)',
+              animation: 'gradient 15s ease infinite',
+              backgroundSize: '200% 200%'
+            }}
+          />
+          
+          <div className="relative space-y-6 text-center">
             <h3 className="text-2xl font-semibold text-white" style={{ fontFamily: 'Montserrat, sans-serif' }}>
               Файлы для скачивания
             </h3>
-            <p className="text-sm text-white/80" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 300 }}>
+            <p className="text-sm text-slate-400" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 300 }}>
               Все форматы с сохранением градиентов
             </p>
             
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
-              <Button variant="secondary" className="bg-white/20 hover:bg-white/30 text-white border-white/30 backdrop-blur">
-                <Icon name="Download" size={16} className="mr-2" />
-                SVG
-              </Button>
-              <Button variant="secondary" className="bg-white/20 hover:bg-white/30 text-white border-white/30 backdrop-blur">
-                <Icon name="Download" size={16} className="mr-2" />
-                PNG
-              </Button>
-              <Button variant="secondary" className="bg-white/20 hover:bg-white/30 text-white border-white/30 backdrop-blur">
-                <Icon name="Download" size={16} className="mr-2" />
-                EPS
-              </Button>
-              <Button variant="secondary" className="bg-white/20 hover:bg-white/30 text-white border-white/30 backdrop-blur">
-                <Icon name="Download" size={16} className="mr-2" />
-                AI
-              </Button>
+              {['SVG', 'PNG', 'EPS', 'AI'].map((format) => (
+                <Button 
+                  key={format}
+                  className="group relative overflow-hidden"
+                  style={{
+                    background: 'linear-gradient(135deg, #0EA5E9, #1E40AF)',
+                    border: 'none'
+                  }}
+                >
+                  <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <Icon name="Download" size={16} className="mr-2 relative z-10" />
+                  <span className="relative z-10">{format}</span>
+                </Button>
+              ))}
             </div>
           </div>
         </Card>
 
-        <div className="bg-white rounded-lg p-8 shadow-lg border-0">
-          <p className="text-xs text-slate-400 text-center mb-4 uppercase tracking-wider" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 300 }}>
-            ИИ-концепт
-          </p>
-          <img 
-            src="https://cdn.poehali.dev/projects/f5e8afe5-8b08-4867-8418-b357290294d3/files/86353eae-2d35-4aa6-8168-375805facacd.jpg"
-            alt="Абстрактный креативный концепт логотипа"
-            className="w-full h-auto rounded-lg"
-          />
-        </div>
-
       </div>
+
+      <style>{`
+        @keyframes gradient {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+      `}</style>
     </div>
   );
 };
